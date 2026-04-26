@@ -2,7 +2,9 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <title>Ápice Mastermind · Estrutura Macro do Ecossistema</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -296,9 +298,34 @@ html,body{height:100%;background:#e9d4cd;color:var(--ink);font-family:var(--sans
 /* tiny mark for layered cards */
 .mark-line{position:absolute;left:0;top:0;width:3px;height:0;background:var(--rose-brick);transition:height .8s ease}
 .layer-card.in .mark-line,.pilar.in .mark-line,.guard-col.in .mark-line,.anjo-card.in .mark-line,.caso.in .mark-line,.mod.in .mark-line,.month.in .mark-line{height:100%}
+
+/* ---------- mobile: pedir landscape ---------- */
+.rotate-hint{display:none;position:fixed;inset:0;z-index:1000;background:radial-gradient(ellipse at center,#2a1f1d 0%,#0e0807 100%);color:#f7e7e3;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;font-family:var(--sans)}
+.rh-phone{width:64px;height:104px;border:3px solid #f7e7e3;border-radius:14px;position:relative;margin-bottom:42px;animation:phone-rotate 2.4s cubic-bezier(.6,.05,.4,1) infinite}
+.rh-phone::before{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:24px;height:3px;background:#f7e7e3;border-radius:3px;opacity:.7}
+.rh-phone::after{content:'';position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:18px;height:18px;border:2px solid #f7e7e3;border-radius:50%;opacity:.7}
+@keyframes phone-rotate{0%,15%{transform:rotate(0deg)}55%,85%{transform:rotate(-90deg)}100%{transform:rotate(-90deg)}}
+.rh-title{font-family:var(--serif);font-style:italic;font-weight:500;font-size:30px;color:#f7e7e3;margin-bottom:14px;line-height:1.1}
+.rh-text{font-size:13px;line-height:1.6;letter-spacing:.32em;text-transform:uppercase;font-weight:300;color:rgba(247,231,227,.65);max-width:300px}
+.rh-brand{position:absolute;top:32px;left:50%;transform:translateX(-50%);font-family:var(--sans);font-weight:300;font-size:10px;letter-spacing:.5em;color:rgba(247,231,227,.5)}
+
+@media (max-width: 900px) and (orientation: portrait){
+  .rotate-hint{display:flex}
+  .stage,.hud,.overview{display:none !important}
+}
+@media (max-width: 900px) and (orientation: landscape){
+  .hud{display:none !important}
+}
 </style>
 </head>
 <body>
+
+<div class="rotate-hint" aria-hidden="true">
+  <div class="rh-brand">ÁPICE · MASTERMIND</div>
+  <div class="rh-phone"></div>
+  <div class="rh-title">Gire o aparelho</div>
+  <div class="rh-text">Esta apresentação foi desenhada para tela horizontal</div>
+</div>
 
 <div class="stage" id="stage">
   <div class="deck" id="deck">
